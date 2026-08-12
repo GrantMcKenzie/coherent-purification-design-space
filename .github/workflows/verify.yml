@@ -1,0 +1,58 @@
+name: verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install the pinned environment
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-frozen.txt
+
+      - name: Record the environment actually used
+        run: |
+          python -c "import sys, platform; print(sys.version, platform.platform())"
+          pip freeze
+
+      - name: Unit tests
+        run: python -m pytest tests/ -q
+
+      - name: Reproduce every stated result
+        run: python verify_all.py
+
+      - name: Regenerate figures
+        run: python make_figures.py
+
+      - name: Reject Type 3 fonts (arXiv flags these)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          fail=0
+          for f in figures/*.pdf; do
+            if pdffonts "$f" | awk 'NR>2 {print $2}' | grep -q "Type3"; then
+              echo "::error file=$f::Type 3 font embedded"; fail=1
+            fi
+          done
+          exit $fail
+
+      - name: Upload regenerated figures
+        uses: actions/upload-artifact@v4
+        with:
+          name: figures-py${{ matrix.python-version }}
+          path: figures/

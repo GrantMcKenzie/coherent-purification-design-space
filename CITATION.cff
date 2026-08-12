@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+title: >-
+  Coherent-error robustness of entanglement purification is a
+  finite design problem (analysis code)
+message: >-
+  If you use this software, please cite both the software
+  itself and the accompanying paper.
+type: software
+authors:
+  - given-names: Grant
+    family-names: McKenzie
+    affiliation: University of North Carolina at Chapel Hill
+version: 1.0.0
+date-released: "2026-08-01"
+license: MIT
+repository-code: "https://github.com/GrantMcKenzie/coherent-purification-design-space"
+doi: XX.XXXX/zenodo.XXXXXXX
+keywords:
+  - entanglement purification
+  - coherent errors
+  - Clifford group
+  - quantum networks
+preferred-citation:
+  type: article
+  title: >-
+    Coherent-error robustness of entanglement purification is a
+    finite design problem
+  authors:
+    - given-names: Grant
+      family-names: McKenzie
+      affiliation: University of North Carolina at Chapel Hill
+  year: 2026
