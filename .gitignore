@@ -15,3 +15,4 @@ figures/*.pdf
 *.bbl
 *.blg
 build/
+repo-update.tar.gz
