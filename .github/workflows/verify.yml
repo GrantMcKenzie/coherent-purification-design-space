@@ -34,8 +34,11 @@ jobs:
       - name: Unit tests
         run: python -m pytest tests/ -q
 
-      - name: Reproduce every stated result
+      - name: Reproduce every stated result (two-pair)
         run: python verify_all.py
+
+      - name: Reproduce every stated result (master formula, three pairs)
+        run: python verify_threepair.py
 
       - name: Regenerate figures
         run: python make_figures.py

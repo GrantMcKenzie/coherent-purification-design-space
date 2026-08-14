@@ -3,7 +3,6 @@ __pycache__/
 .venv/
 .ipynb_checkpoints/
 .pytest_cache/
-figures/*.pdf
 
 # LaTeX
 *.aux
@@ -15,4 +14,3 @@ figures/*.pdf
 *.bbl
 *.blg
 build/
-repo-update.tar.gz
