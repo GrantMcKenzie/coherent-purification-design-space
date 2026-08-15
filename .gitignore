@@ -16,3 +16,4 @@ __pycache__/
 build/
 repo-update.tar.gz
 *.tar.gz
+.DS_Store
