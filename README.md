@@ -51,6 +51,12 @@ agreement (`2.5e-16` and `1.3e-15`) is asserted in `verify_all.py` and
 `verify_threepair.py`. The third engine is what makes the three-pair section checkable at
 all: it evaluates all 635040 susceptibilities of the 1120-atom design space.
 
+These are the same three routes the paper refers to in Sec. 3.3 and Appendix C: the
+density-matrix engine is the literal `4^n x 4^n` implementation (available in both exact
+second-order and central-finite-difference form), the group-theoretic engine is the
+Bell-basis reduction whose closed forms are checked symbolically in Appendix A, and the
+master formula is the direct evaluation of Eq. (13).
+
 ## What is where
 
 | path | contents |
@@ -74,7 +80,7 @@ all: it evaluates all 635040 susceptibilities of the 1120-atom design space.
 |---|---|---|
 | `\|C_2 / phases\|` | 11520 | 11520 |
 | distinct atoms | 10, multiplicity 1152 each | 10, all 1152 |
-| `M` diagonal in the Pauli basis | [VER], all 30 (atom, check) pairs | max off-diagonal **exactly 0.0** |
+| `M` diagonal in the Pauli basis | Corollary 5, all 30 (atom, check) pairs | max off-diagonal **exactly 0.0** |
 | worst-direction susceptibility | `4(2F+1)(4F-1)/D` on every purifying pair | 3.6954314721, single value over all 18 |
 | `lambda_A - lambda_{C,D,E}` discriminants | -135, -36, -279 | -135, -36, -279 |
 | irreducible core | `{XI,XX,XZ,ZI,ZX,ZZ,YY}` | identical; the nullability criterion predicts it exactly |
@@ -85,15 +91,16 @@ all: it evaluates all 635040 susceptibilities of the 1120-atom design space.
 | `F0*` crossover | `(3*sqrt(2)-2)/4` | 0.560660171780 |
 | three-pair `lambda_max` | one value per map | single-valued, matches both closed forms |
 
-Three entries in `verify_all.py` are tagged `[FIX]`. They guard corrections to an earlier
-draft and exist so those errors cannot reappear silently:
+Four entries across the two verification scripts are tagged `[FIX]`. They guard
+corrections to an earlier draft and exist so those errors cannot reappear silently
+(items 1-3 in `verify_all.py`, item 4 in `verify_threepair.py`):
 
 1. The Z and X checks do **not** share one `Tr M`. Their twelve purifying pairs split
    into 15.792 (x8), 15.870 (x2) and 16.770 (x2) at `F_0 = 0.9`.
 2. The Y check has **no** exceptional atom: all six of its purifying atoms share the
    multiplicity pattern `(2,1,3,3,1)` at uniform rank 10. This is why the isotropic
-   optimum is six-fold degenerate, and `2 lambda_A + lambda_B + 3 lambda_C + 3 lambda_D
-   + lambda_E` equals Eq. (36) identically in `F_0`.
+   optimum is six-fold degenerate, and why `2 lA + lB + 3 lC + 3 lD + lE` is a single
+   rational function of `F_0`, equal to the `Tr M = 12.90` quoted in Sec. 14.
 3. The irreducible-core minimum is `lambda_D` only above threshold:
    `lambda_C - lambda_D` carries the factor `(2F_0 - 1)` and the two letters cross at
    `F_0 = 1/2`.
@@ -128,7 +135,9 @@ rejects.
 ## Citing
 
 See `CITATION.cff`, or the "Cite this repository" button above. Please cite both the
-paper and the archived software release.
+paper and the archived software release. The arXiv identifier and the Zenodo DOI are
+placeholders until posting, at which point the release is archived and both are filled
+in here and in `CITATION.cff`.
 
 ## License
 
