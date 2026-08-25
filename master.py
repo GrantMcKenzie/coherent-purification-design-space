@@ -1,7 +1,9 @@
 """Direct implementation of the master formula, at any number of pairs.
 
-Labels: v in F_2^{2n}, two bits per pair, (z,x) ordering so that
-    (0,0)=I, (1,0)=X, (0,1)=Z, (1,1)=Y   (x,z ordering per pair).
+Labels: v in F_2^{2n}, two bits per pair in (x, z) order, so that
+    (0,0)=I, (1,0)=X, (0,1)=Z, (1,1)=Y.
+This matches the (x, z) per-pair convention of general_n.py; the two engines
+are cross-checked in tests/test_engine_agreement.py.
 
 Symplectic form  <u,v> = sum_k (u_x^k v_z^k + u_z^k v_x^k)  mod 2.
 Y-parity         y(p) = #{k : p_k = (1,1)} mod 2.

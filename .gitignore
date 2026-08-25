@@ -1,19 +1,26 @@
+# Python
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
 .venv/
-.ipynb_checkpoints/
+venv/
 .pytest_cache/
 
-# LaTeX
+# Generated data caches (reproducible from scripts)
+*.pkl
+
+# Internal working notes — never publish
+RESULTS.md
+
+# LaTeX build artifacts (if the manuscript lives here)
 *.aux
 *.log
 *.out
 *.synctex.gz
-*.fls
-*.fdb_latexmk
 *.bbl
 *.blg
-build/
-repo-update.tar.gz
-*.tar.gz
+*.fls
+*.fdb_latexmk
+
+# OS cruft
 .DS_Store
